@@ -8,6 +8,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FrameTest {
 
+    @Test()
+    public void cannot_create_frame_with_null_markings() {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            new Frame(null);
+        });
+    }
+
+    @Test()
+    public void cannot_create_frame_with_empty_markings() {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            new Frame("");
+        });
+    }
+
+    @Test()
+    public void cannot_create_frame_with_invalid_marking_characters() {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            new Frame("0&");
+        });
+    }
+
     @Test
     public void can_create_frame_with_2_markings() {
         Frame frame = new Frame("--");
