@@ -1,10 +1,11 @@
 package com.shammer.coaching.bowling;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FrameTest {
 
@@ -38,38 +39,31 @@ public class FrameTest {
         assertThat(frame.third()).isNull();
     }
 
-    @Test
-    public void can_create_frame_with_2_markings() {
-        Frame frame = new Frame("--");
+    @ParameterizedTest
+    @CsvSource({"--,-,-", "-7,-,7", "-/,-,/", "9-,9,-", "81,8,1", "7/,7,/"})
+    public void can_create_frame_with_2_markings(String frameMarking, Character ball1, Character ball2) {
+        Frame frame = new Frame(frameMarking);
 
-        assertThat(frame.first()).isEqualTo('-');
-        assertThat(frame.second()).isEqualTo('-');
+        assertThat(frame.first()).isEqualTo(ball1);
+        assertThat(frame.second()).isEqualTo(ball2);
         assertThat(frame.third()).isNull();
     }
 
-    // can gutter_number
-    // can gutter_split
+    @ParameterizedTest
+    @CsvSource({"XXX,X,X,X", "XX7,X,X,7", "X7-,X,7,-", "X71,X,7,1", "X7/,X,7,/", "7/-,7,/,-", "7/9,7,/,9", "7/X,7,/,X"})
+    public void can_create_frame_with_3_markings(String frameMarking, Character ball1, Character ball2, Character ball3) {
+        Frame frame = new Frame(frameMarking);
+
+        assertThat(frame.first()).isEqualTo(ball1);
+        assertThat(frame.second()).isEqualTo(ball2);
+        assertThat(frame.third()).isEqualTo(ball3);
+    }
+
     // cannot gutter_strike
-    // can number_gutter
-    // can number_number
-    // can number_split
     // cannot number_strike
     // cannot split_anything
-    // can strike
-    // can strike_gutter_gutter 10th
-    // can strike_gutter_number 10th
-    // can strike_gutter_spare 10th
-    // can strike_number_gutter 10th
-    // can strike_number_number 10th
-    // can strike_number_spare 10th
-    // can strike_strike_gutter 10th
-    // can strike_strike_number 10th
-    // can strike_strike_strike 10th
-    // can gutter_spare_gutter 10th
-    // can gutter_spare_number 10th
-    // can gutter_spare_strike 10th
-    // can number_spare_gutter 10th
-    // can number_spare_number 10th
-    // can number_spare_strike 10th
-
+    // cannot gutter_gutter_anything
+    // cannot gutter_number_anything
+    // cannot number_gutter_anything
+    // cannot number_number_anything
 }
