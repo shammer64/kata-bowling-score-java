@@ -27,6 +27,7 @@ public class Frame {
     }
 
     public Character second() {
+        if (balls.size() < 2) return null;
         return balls.get(1);
     }
 

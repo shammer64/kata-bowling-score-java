@@ -30,6 +30,15 @@ public class FrameTest {
     }
 
     @Test
+    public void can_create_frame_with_1_marking() {
+        Frame frame = new Frame("X");
+
+        assertThat(frame.first()).isEqualTo('X');
+        assertThat(frame.second()).isNull();
+        assertThat(frame.third()).isNull();
+    }
+
+    @Test
     public void can_create_frame_with_2_markings() {
         Frame frame = new Frame("--");
 
