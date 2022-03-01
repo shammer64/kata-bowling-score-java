@@ -35,4 +35,38 @@ public class Frame {
         if (balls.size() < 3) return null;
         return balls.get(2);
     }
+
+    public boolean isSpare() {
+        return second().equals('/');
+    }
+
+    public boolean isStrike() {
+        return first().equals('X');
+    }
+
+    public int ballsThrown() {
+        return balls.size();
+    }
+
+    public int firstBallScore() {
+        if (first().equals('-')) return 0;
+        if (first().equals('X')) return 10;
+        return Character.getNumericValue(first());
+    }
+
+    public int secondBallScore() {
+        if (second().equals('-')) return 0;
+        if (second().equals('X')) return 10;
+        if (second().equals('/'))
+            return 10 - Character.getNumericValue(first());
+        return Character.getNumericValue(second());
+    }
+
+    public int thirdBallScore() {
+        if (third().equals('-')) return 0;
+        if (third().equals('X')) return 10;
+        if (third().equals('/'))
+            return 10 - Character.getNumericValue(second());
+        return Character.getNumericValue(third());
+    }
 }
