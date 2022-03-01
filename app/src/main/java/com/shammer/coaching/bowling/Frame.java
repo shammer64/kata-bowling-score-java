@@ -37,7 +37,7 @@ public class Frame {
     }
 
     public boolean isSpare() {
-        return second().equals('/');
+        return second() != null && second().equals('/');
     }
 
     public boolean isStrike() {

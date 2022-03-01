@@ -66,6 +66,14 @@ public class FrameTest {
         assertThat(frame.isSpare()).isTrue();
     }
 
+    @ParameterizedTest
+    @CsvSource({"X", "45", "7-"})
+    public void can_identify_frame_as_not_a_spare(String frameMarking) {
+        Frame frame = new Frame(frameMarking);
+
+        assertThat(frame.isSpare()).isFalse();
+    }
+
     @Test
     public void can_identify_frame_as_strike() {
         Frame frame = new Frame("X");

@@ -38,8 +38,27 @@ public class Game {
         Frame currFrame = frameList.get(index);
         if (currFrame.isSpare())
             return computeSpareFrame(currFrame,
-                    index == 9 ? null: frameList.get(index + 1));
+                    index >= 9 ? null: frameList.get(index + 1));
+        if (currFrame.isStrike())
+            return computeStrikeFrame(currFrame,
+                    index >= 9 ? null: frameList.get(index + 1),
+                    index >= 8 ? null: frameList.get(index + 2));
         return computeSimpleFrameScore(currFrame);
+    }
+
+    private int computeStrikeFrame(Frame currFrame, Frame nextFrame, Frame nextNextFrame) {
+        int frameScore = 0;
+        if (currFrame.ballsThrown() == 1) {
+            frameScore += 10;
+            if (nextFrame.ballsThrown() == 1)
+                frameScore += (nextFrame.firstBallScore() +
+                            nextNextFrame.firstBallScore());
+            else
+                frameScore += (nextFrame.firstBallScore() +
+                            nextFrame.secondBallScore());
+        } else// 10th frame
+            return currFrame.firstBallScore() + currFrame.secondBallScore() + currFrame.thirdBallScore();
+        return frameScore;
     }
 
     private int computeSpareFrame(Frame currFrame, Frame nextFrame) {
@@ -52,6 +71,8 @@ public class Game {
         int frameScore = 0;
         frameScore += currFrame.firstBallScore();
         frameScore += currFrame.secondBallScore();
+        if (currFrame.ballsThrown() == 3)
+            frameScore += currFrame.thirdBallScore();
         return frameScore;
     }
 }

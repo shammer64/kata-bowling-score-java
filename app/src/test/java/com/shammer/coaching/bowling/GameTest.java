@@ -54,4 +54,19 @@ public class GameTest {
 
         assertThat(game.getScore()).isEqualTo(150);
     }
+
+    @Test
+    public void can_score_game_with_all_strikes() {
+        Game game = new Game("X X X X X X X X X XXX");
+
+        assertThat(game.getScore()).isEqualTo(300);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"X9-,288", "X9/,289", "9/9,278", "9-,267"})
+    public void can_score_game_with_all_variations_in_tenth_frame(String tenthFrameMarking, int expectedScore) {
+        Game game = new Game("X X X X X X X X X " + tenthFrameMarking);
+
+        assertThat(game.getScore()).isEqualTo(expectedScore);
+    }
 }
