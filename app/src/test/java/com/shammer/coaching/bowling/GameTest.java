@@ -43,15 +43,15 @@ public class GameTest {
 
     @Test
     public void can_score_game_with_no_spares_or_strikes() {
-        Game game = new Game("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5");
+        Game game = new Game("-9 18 27 36 45 54 63 72 81 9-");
 
-        assertThat(game.getScore()).isEqualTo(150);
+        assertThat(game.getScore()).isEqualTo(90);
     }
 
     @Test
     public void can_score_game_with_all_spares() {
-        Game game = new Game("-9 18 27 36 45 54 63 72 81 9-");
+        Game game = new Game("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5");
 
-        assertThat(game.getScore()).isEqualTo(90);
+        assertThat(game.getScore()).isEqualTo(150);
     }
 }
