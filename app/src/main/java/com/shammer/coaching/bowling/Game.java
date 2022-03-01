@@ -71,8 +71,6 @@ public class Game {
         int frameScore = 0;
         frameScore += currFrame.firstBallScore();
         frameScore += currFrame.secondBallScore();
-        if (currFrame.ballsThrown() == 3)
-            frameScore += currFrame.thirdBallScore();
         return frameScore;
     }
 }
