@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty"},
-        glue = "com.pluralsight.bdd.steps",
+        glue = "com.shammer.coaching.bowling",
         features = "classpath:features"
 )
 public class CucumberTests {
